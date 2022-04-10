@@ -1,0 +1,66 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home'%}">
+        <img src="{% static 'images/favicon.ico' %}" alt="Logo" width="50" height="50" class="ms-3">
+        <span class="fw-bold ms-3 h4 align-middle"> DJ-Spark </span>
+    </a>
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 pt-1">
+          <li class="nav-item">
+            <a class="nav-link text-bold align-middle text-white" aria-current="page" href="{% url 'advanced' %}">
+              <i class="bi bi-patch-plus pe-2"></i>
+              Advanced
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-bold align-middle text-white" aria-current="page" href="{% url 'quantum' %}">
+              <i class="bi bi-cpu pe-2 ms-2"></i>
+              Quantum
+            </a>
+          </li>
+      </ul>
+    </div>
+
+    {% if not request.user.is_authenticated %}
+      <div class="d-flex">
+          <a href="{% url "account_login" %}" class="btn btn-outline-primary me-2">
+            <i class="bi bi-box-arrow-in-left pe-2"></i>
+            Login
+          </a>
+          <a href="{% url "account_signup" %}" class="btn btn-primary me-2">
+            <i class="bi bi-person-plus pe-2"></i>
+            Register
+          </a>
+      </div>
+    
+    {% else %}
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="/uploads/{{ request.user.profile.avatar}}" alt="User's Avatar" width=50 height=50 class="mx-2">
+            <span class="text-center align-middle">{{ request.user }}</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+            <li>
+              <a class="dropdown-item" href="{% url 'dataset_list' %}">
+                <i class="bi bi-server pe-2"></i>
+                Datasets
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'account_logout' %}">
+                <i class="bi bi-box-arrow-left pe-2"></i>
+                Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+    {% endif %}
+  </div>
+</nav>

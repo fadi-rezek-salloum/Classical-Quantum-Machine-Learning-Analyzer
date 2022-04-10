@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Quantum Processing
+{% endblock title %}
+
+{% block content %}
+    
+    <div class="text-center mb-3">
+        <div class="badge bg-primary text-wrap fs-3 mb-5">
+                Quantum Processing Section
+        </div>
+    </div>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="input-group mb-5">
+            <label class="form-label col-12">Repetitions</label>           
+
+            <input type="text" name="X" id="X" class="form-control me-5">
+            <input type="text" name="Y" id="Y" class="form-control me-5">
+            <input type="text" name="Z" id="Z" class="form-control">
+        </div>
+
+        <input type="file" name="dataSetFile" id="dataSetFile" class="form-control" required="true">
+
+        <button type="submit" class="btn btn-primary mt-5 pe-4 ps-4 text-center">
+            <i class="bi bi-gear-wide-connected"></i>
+            Process
+        </button>
+
+    </form>
+
+{% endblock content %}

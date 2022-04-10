@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Datasets List
+{% endblock title %}
+
+{% block content %}
+
+    <p class="h4">
+        Datasets List
+    </p>
+    
+    <div class="row mb-5">
+
+        {% for obj in object_list %}
+            <div class="col-md-3 col-sm-12 mb-3 mt-3">
+                <div class="card">
+                    <div class="card-header">
+                        {{ obj.sparkID }}-{{ obj.algorithm }}
+                    </div>
+                    <div class="card-body">
+                        {{ obj.created }}
+                        <div class="mt-4 text-center">
+                            <a href="{{ obj.get_absolute_url }}" class="btn btn-primary">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}
+    Register
+{% endblock title %}
+
+{% block content %}
+
+    <h2>Add an account</h2>
+
+    <form action="{% url 'account_signup' %}" method="post" class="signup" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="mt-3 mb-3">
+            <label for="firstName" class="form-label">First name <span class="text-danger">*</span></label>
+            {% render_field form.first_name class="form-control" id="firstName" %}
+        </div>
+
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Last name <span class="text-danger">*</span></label>
+            {% render_field form.last_name class="form-control" id="lastName" %}
+        </div>
+
+        <div class="mb-3">
+            <label for="emailField" class="form-label">Email <span class="text-danger">*</span></label>
+            {% render_field form.email class="form-control" id="emailField" %}
+        </div>
+
+        <div class="mb-3">
+            <label for="password1" class="form-label">Password <span class="text-danger">*</span></label>
+            {% render_field form.password1 class="form-control" id="password1" %}
+        </div>
+
+        <div class="mb-3">
+            <label for="password2" class="form-label">Confirm password <span class="text-danger">*</span></label>
+            {% render_field form.password2 class="form-control" id="password2" %}
+        </div>
+
+        <div class="mb-4">
+            <label for="avatar" class="form-label">Profile picture</label>
+            {% render_field form.avatar class="form-control" id="avatar" name="avatar" %}
+        </div>
+
+
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        <button type="submit" class="btn btn-primary mb-3" id="widerButton"> Register </button>
+    </form>
+
+    <p>Already have an account? Then please <a href="{{ login_url }}">Login</a>.</p>
+
+
+{% endblock content %}

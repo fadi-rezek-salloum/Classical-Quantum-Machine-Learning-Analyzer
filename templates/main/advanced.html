@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}
+    Advanced Handler
+{% endblock title %}
+
+{% block scripts %}
+
+<script>
+$( function() {
+
+    $("#min_depth").val("1");
+    $("#max_depth").val("20");
+
+    $("#min_depth").bind('keyup mouseup', function (e) {
+        min_depth = $("#min_depth").val();
+        max_depth = $("#max_depth").val();
+
+        $("#slider-range").slider("values", [min_depth, max_depth])        
+    });
+
+    $("#max_depth").bind('keyup mouseup', function (e) {
+        min_depth = $("#min_depth").val();
+        max_depth = $("#max_depth").val();
+
+        $("#slider-range").slider("values", [min_depth, max_depth])        
+    });
+
+    $("#slider-range").slider({
+    range: true,
+    min: 1,
+    max: 20,
+    values: [1, 20],
+    slide: function( event, ui ) {
+        $("#min_depth").val(ui.values[0]);
+        $("#max_depth").val(ui.values[1]);
+    }
+    });
+});
+</script>
+
+{% endblock scripts %}
+
+{% block content %}
+
+<div class="text-center mb-3">
+    <div class="badge bg-primary text-wrap fs-3 mb-4">
+            Advanced Section
+    </div>
+</div>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="mb-4">
+        {% render_field form.dataSetFile class="form-control" id="formFile" %}
+    </div>
+
+    <div class="form-check form-switch">
+        {% render_field form.DT type="checkbox" id="flexSwitchCheckDefault" %}
+        <label class="form-check-label" for="flexSwitchCheckDefault">DT</label>
+    </div>
+
+    <div class="form-check form-switch">
+        {% render_field form.RFC type="checkbox" id="flexSwitchCheckDefault" %}
+        <label class="form-check-label" for="flexSwitchCheckDefault">RFC</label>
+    </div>
+
+    <div class="row g-3 mt-4">
+        <div class="col-2">
+            <label for="min_depth" class="form-label">Min DT Depth</label>
+            {% render_field form.min_depth class="form-control form-control-sm" id="min_depth" %}
+        </div>
+
+        <div class="col-1"></div>
+
+        <div class="col-6">
+            <p class="text-center">Choose from Slider</p>
+            <div id="slider-range"></div>
+        </div>
+
+        <div class="col-1"></div>
+        
+        <div class="col-2">
+            <label for="max_depth" class="form-label">Max DT Depth</label>
+            {% render_field form.max_depth class="form-control form-control-sm" id="max_depth" %}
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-5 pe-4 ps-4 text-center">
+            <i class="bi bi-upload pe-1"></i>
+            Upload
+    </button>
+
+</form>
+
+{% endblock content %}

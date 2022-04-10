@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Quantom Processing
+{% endblock title %}
+
+{% block content %}
+
+{% if request.session.chart %}
+
+    <div class="my-5">
+        <h3>Chart</h3>
+        <img src="data:image/png;base64,{{ request.session.chart }}" alt="Quantom Chart" class="img-fluid">
+    </div>
+
+{% else %}
+
+    <div class="my-5">
+        <h3>No charts to view!</h3>
+    </div>
+
+{% endif %}
+
+{% endblock content %}

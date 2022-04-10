@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,700;1,300&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+#widerButton {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.dataframe {
+    width: 100%;
+}
+
+.dataframe th {
+    text-align: center;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}

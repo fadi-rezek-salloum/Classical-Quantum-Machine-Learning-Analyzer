@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Home
+{% endblock title %}
+
+{% block content %}
+
+    <div class="text-center mb-3">
+        <div class="badge bg-primary text-wrap fs-3 mb-5">
+                Basic Section
+        </div>
+    </div>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="dataSetFile" id="dataSetFile" class="form-control" required="true">
+        <button type="submit" class="btn btn-primary mt-5 pe-4 ps-4 text-center">
+            <i class="bi bi-upload pe-1"></i>
+            Upload
+        </button>
+    </form>
+
+{% endblock content %}
+
